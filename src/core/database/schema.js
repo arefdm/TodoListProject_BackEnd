@@ -1,12 +1,12 @@
 import { pgSchema, uuid, serial, varchar, text, date, timestamp } from 'drizzle-orm/pg-core';
 
 // Define the "todo" schema
-const todo = pgSchema('todo');
+export const todo = pgSchema('todo');
 
 // Users table in "todo" schema
 export const users = todo.table('users', {
   id: uuid('id').primaryKey().defaultRandom(),
-  username: varchar('username', { length: 50 }).notNull().unique(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
   password: varchar('password', { length: 255 }).notNull(),
   createdAt: timestamp('created_at').defaultNow(),
 });
