@@ -35,3 +35,17 @@ export const updateTask = async (req,res) => {
       res.status(500).json({ error: 'Server error' });
     }
 }
+
+export const deleteTask = async (req,res) => {
+  try {
+    const taskId = req.params.task_id;
+    const deletedTask = await deleteTask(taskId);
+    if (deletedTask.rowCount === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+    res.json({ message: 'Task deleted successfully' });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error' });
+    }
+}

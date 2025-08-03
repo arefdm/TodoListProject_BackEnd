@@ -31,3 +31,13 @@ export const editTask = async (taskId,userId,title,description,dueDate,status) =
     console.error(err.message);
   }
 }
+
+export const removeTask = async (taskId) => {
+ try {
+  const deletedTask = await db.delete(tasks)
+  .where(eq(tasks.id, taskId))
+  .returning();
+ } catch (err) {
+  console.error(err.message);
+ }
+}
