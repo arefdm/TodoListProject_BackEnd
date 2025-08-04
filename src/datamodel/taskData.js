@@ -23,10 +23,11 @@ export const addNewTask = async (userId,title,description,dueDate,status) => {
 export const editTask = async (taskId,userId,title,description,dueDate,status) => {
   try {
     const dateOnly = new Date(dueDate).toISOString().split('T')[0];
+    const currentDate = new Date();
     const newTask = await db.update(tasks)
-    .set({ userId: userId , title: title, description: description, dueDate: dateOnly,status: status })
+    .set({ userId: userId , title: title, description: description, dueDate: dateOnly,status: status,updatedAt: currentDate })
     .where(eq(tasks.id, taskId))
-    .returning({ updatedId: users.id });
+    .returning({ updatedId: tasks.id });
   } catch (err) {
     console.error(err.message);
   }
@@ -36,7 +37,8 @@ export const removeTask = async (taskId) => {
  try {
   const deletedTask = await db.delete(tasks)
   .where(eq(tasks.id, taskId))
-  .returning();
+  .returning({"deletedtask":tasks.id});
+  return deletedTask;
  } catch (err) {
   console.error(err.message);
  }
