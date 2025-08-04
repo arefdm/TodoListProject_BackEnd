@@ -20,6 +20,7 @@
   "homepage": "https://github.com/arefdm/Todo_project_backend#readme",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.4",
     "express": "^5.1.0",
