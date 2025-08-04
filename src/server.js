@@ -1,5 +1,5 @@
 import express from 'express';
-// import autRoutes from './routes/auth';
+import authenticationRoutes from './routes/authentication.js';
 import taskRoutes from './routes/tasks.js';
 import { config } from './core/config/index.js';
 
@@ -8,7 +8,7 @@ const port = config.server.port;
 
 app.use(express.json());
 
-// app.use('/api',autRoutes);
+app.use('/api', authenticationRoutes);
 app.use('/api/tasks', taskRoutes);
 
 // app.get('/api/tasks',(req,res)=>{
