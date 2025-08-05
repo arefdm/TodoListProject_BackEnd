@@ -15,7 +15,6 @@ export const getUser = async (email)=>{
 export const addUser = async (email,hashedPassword)=>{
     try {
         const newUser = await db.insert(users).values({ email: email, password: hashedPassword }).returning();
-        console.log(newUser);
         return newUser; 
     } catch (error) {
         console.log(error);
