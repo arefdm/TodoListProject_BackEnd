@@ -17,7 +17,7 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await addUser(email,hashedPassword);
 
-    res.status(201).send(newUser);
+    res.status(201).send({message:"Success! your account has been created",newUser});
   } catch (err) {
     console.error('Register error:', err.message);
     res.status(500).json({ error: 'Server error' });
