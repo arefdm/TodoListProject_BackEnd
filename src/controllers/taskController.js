@@ -4,6 +4,7 @@ export const getTasks = async (req, res) => {
     try {
       const userId = req.user.userId;
       const allTasks = await getUserTasks(userId);
+      console.log(allTasks);
       res.send(allTasks);
     } catch (err) {
       console.error(err.message);
@@ -14,8 +15,8 @@ export const getTasks = async (req, res) => {
 export const createTask = async (req,res) => {
   try {
   const userId = req.user.userId;
-  const {title,description,due_date,status} = req.body;
-  const newTask = await addNewTask(userId,title,description,due_date,status);
+  const {title,description,dueDate,status} = req.body;
+  const newTask = await addNewTask(userId,title,description,dueDate,status);
   res.status(201).json(newTask);
   } catch (err) {
     console.error(err.message);
@@ -27,8 +28,8 @@ export const updateTask = async (req,res) => {
   try {
     const userId = req.user.userId;
     const taskId = req.params.task_id;
-    const {title,description,due_date,status} = req.body;
-    const editedTask = await editTask(taskId,userId,title,description,due_date,status);
+    const {title,description,dueDate,status} = req.body;
+    const editedTask = await editTask(taskId,userId,title,description,dueDate,status);
     res.status(201).json(editedTask);
     } catch (err) {
       console.error(err.message);
