@@ -15,6 +15,7 @@ export const addNewTask = async (userId,title,description,dueDate,status) => {
   try {
     const dateOnly = new Date(dueDate).toISOString().split('T')[0];
     const newTask = await db.insert(tasks).values({userId: userId , title: title, description: description, dueDate: dateOnly,status: status });
+    return newTask;
   } catch (err) {
     console.error(err.message);
   }
