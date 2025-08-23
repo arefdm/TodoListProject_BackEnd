@@ -3,7 +3,10 @@ import { getUserTasks,addNewTask,editTask, removeTask } from '../datamodel/taskD
 export const getTasks = async (req, res) => {
     try {
       const userId = req.user.userId;
-      const allTasks = await getUserTasks(userId);
+      const dueDate = req.query.dueDate;
+      const title = req.query.title;
+      console.log(dueDate);
+      const allTasks = await getUserTasks(userId,title,dueDate);
       console.log(allTasks);
       res.send(allTasks);
     } catch (err) {

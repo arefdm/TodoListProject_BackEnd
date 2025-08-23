@@ -2,8 +2,25 @@ import { db } from "../core/database/connection.js";
 import { tasks } from "../core/database/schema.js";
 import { eq,and } from "drizzle-orm";
 
-export const getUserTasks = async (userId) => {
+export const getUserTasks = async (userId,title,dueDate) => {
+  console.log("title:  "+title+"  duedate: "+ dueDate)
     try {
+      if(title && dueDate){
+        console.log("joft");
+        const allTasks = await db.select().from(tasks).where(and(eq(tasks.userId, userId),eq(tasks.title, title), eq(tasks.dueDate, dueDate)));
+        return allTasks;
+      }
+      if(title && !dueDate){
+        console.log("title");
+        const allTasks = await db.select().from(tasks).where(and(eq(tasks.userId, userId),eq(tasks.title, title)));
+        return allTasks;
+      }
+      if(!title && dueDate){
+        console.log("due");
+        const allTasks = await db.select().from(tasks).where(and(eq(tasks.userId, userId), eq(tasks.dueDate, dueDate)));
+        console.log(allTasks[0].title);
+        return allTasks;
+      }
       const allTasks = await db.select().from(tasks).where(eq(tasks.userId, userId));
       return allTasks;
     } catch (err) {
