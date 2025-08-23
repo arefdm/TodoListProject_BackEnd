@@ -50,8 +50,11 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign({userId: user.id},config.jwtSecret.secret,{ expiresIn:'1d'})
-    
-    res.json({"Token": token});
+    res.cookie('authToken',token,{
+      httpOnly : true,
+      maxAge : 1000*60*60*24
+    })
+    res.send(email);
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ error: 'Server error' });
@@ -68,4 +71,9 @@ export const logedInUser =async (req,res) => {
       console.error('Logedin error:', err.message);
       res.status(500).json({ error: 'Server error' });
     }
+}
+
+export const logout =(req,res) => {
+  res.clearCookie("authToken", { httpOnly: true });
+  res.json({ message: "Logged out successfully" });
 }
