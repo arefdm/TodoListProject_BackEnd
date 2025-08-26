@@ -7,7 +7,7 @@ export const getUser = async (email)=>{
         const user = await db.select().from(users).where(eq(users.email,email));
         return user; 
     } catch (error) {
-        console.log(error);
+        return Promise.reject(error);
     }  
 };
 
@@ -17,7 +17,7 @@ export const getUserById = async (userId) => {
         console.log(userEmail[0]);
         return userEmail[0];
     } catch (error) {
-        console.log('errr: '+error);
+        return Promise.reject(error);
     }
 }
 
@@ -27,6 +27,6 @@ export const addUser = async (email,hashedPassword)=>{
         const newUser = await db.insert(users).values({ email: email, password: hashedPassword }).returning();
         return newUser; 
     } catch (error) {
-        console.log(error);
+        return Promise.reject(error);
     }
 };

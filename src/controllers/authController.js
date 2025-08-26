@@ -17,7 +17,7 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await addUser(email,hashedPassword);
 
-    res.status(201).send({message:"Success! your account has been created",newUser});
+    res.status(201).send({message:"Success! your account has been created"});
   } catch (err) {
     console.error('Register error:', err.message);
     res.status(500).json({ error: 'Server error' });
@@ -41,7 +41,6 @@ export const login = async (req, res) => {
     const user = userResult[0];
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      console.log('notmatch');
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 
@@ -53,7 +52,7 @@ export const login = async (req, res) => {
     res.cookie('authToken',token,{
       httpOnly : true,
       maxAge : 1000*60*60*24
-    })
+    });
     res.send(email);
   } catch (err) {
     console.error('Login error:', err.message);
@@ -63,11 +62,10 @@ export const login = async (req, res) => {
 
 export const logedInUser =async (req,res) => {
     const userId = req.user.userId;
-    console.log('userId: '+userId);
     try {
       const userEmail = await getUserById(userId);
       res.json(userEmail.email);
-    } catch (error) {
+    } catch (err) {
       console.error('Logedin error:', err.message);
       res.status(500).json({ error: 'Server error' });
     }
