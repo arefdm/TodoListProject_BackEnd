@@ -21,9 +21,7 @@ app.use(express.json());
 app.use('/api', authenticationRoutes);
 app.use('/api/tasks', taskRoutes);
 
-// app.get('/api/tasks',(req,res)=>{
-// res.send('helloworld')
-// })
+
 app.listen(port, ()=>{
     console.log(`Example app listening on port ${port}`)
 })
