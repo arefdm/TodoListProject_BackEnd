@@ -13,8 +13,6 @@ export const authentication = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.jwtSecret.secret);
     req.user = decoded;
-    console.log( decoded);
-    console.log( req.user);
     next();
   } catch (err) {
     console.log(err);

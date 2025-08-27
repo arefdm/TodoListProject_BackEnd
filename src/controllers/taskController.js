@@ -5,12 +5,9 @@ export const getTasks = async (req, res) => {
       const userId = req.user.userId;
       const dueDate = req.query.dueDate;
       const title = req.query.title;
-      console.log(dueDate);
       const allTasks = await getUserTasks(userId,title,dueDate);
-      console.log(allTasks);
       res.send(allTasks);
     } catch (err) {
-      console.error(err.message);
       res.status(500).json({ error: 'Server error' });
     }
   };
@@ -19,7 +16,7 @@ export const createTask = async (req,res) => {
   try {
   const userId = req.user.userId;
   const {title,description,dueDate,status} = req.body;
-  const newTask = await addNewTask(userId,title,description,dueDate,status);
+  await addNewTask(userId,title,description,dueDate,status);
   res.status(201).json({"message": "task added successfully"});
   } catch (err) {
     console.error(err.message);
@@ -32,10 +29,9 @@ export const updateTask = async (req,res) => {
     const userId = req.user.userId;
     const taskId = req.params.task_id;
     const {title,description,dueDate,status} = req.body;
-    const editedTask = await editTask(taskId,userId,title,description,dueDate,status);
+    await editTask(taskId,userId,title,description,dueDate,status);
     res.status(201).json({"message": "task updated successfully"});
     } catch (err) {
-      console.error(err.message);
       res.status(500).json({ error: 'Server error' });
     }
 }
@@ -49,7 +45,6 @@ export const deleteTask = async (req,res) => {
     }
     res.json({ message: 'Task deleted successfully' });
     } catch (err) {
-      console.error(err.message);
       res.status(500).json({ error: 'Server error' });
     }
 }
