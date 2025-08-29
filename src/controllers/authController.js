@@ -71,6 +71,15 @@ export const logedInUser =async (req,res) => {
 }
 
 export const logout =(req,res) => {
-  res.clearCookie("authToken", { httpOnly: true });
-  res.json({ message: "Logged out successfully" });
+  try {
+    if(!req.cookie?.authToken){
+      return res.json({message: "You are already log out"})
+    }
+    res.clearCookie("authToken", { httpOnly: true });
+    res.json({ message: "Logged out successfully" });
+    
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+  
 }
