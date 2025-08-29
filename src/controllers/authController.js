@@ -66,7 +66,6 @@ export const logedInUser =async (req,res) => {
       const userEmail = await getUserById(userId);
       res.json(userEmail.email);
     } catch (err) {
-      console.error('Logedin error:', err.message);
       res.status(500).json({ error: 'Server error' });
     }
 }

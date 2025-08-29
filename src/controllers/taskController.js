@@ -29,7 +29,10 @@ export const updateTask = async (req,res) => {
     const userId = req.user.userId;
     const taskId = req.params.task_id;
     const {title,description,dueDate,status} = req.body;
-    await editTask(taskId,userId,title,description,dueDate,status);
+    const editedTask = await editTask(taskId,userId,title,description,dueDate,status);
+    if(!editedTask[0]){
+      return res.status(404).json({ error: 'Task not found' });
+    }
     res.status(201).json({"message": "task updated successfully"});
     } catch (err) {
       res.status(500).json({ error: 'Server error' });
@@ -38,11 +41,13 @@ export const updateTask = async (req,res) => {
 
 export const deleteTask = async (req,res) => {
   try {
+    const userId = req.user.userId;
     const taskId = req.params.task_id;
-    const deletedTask = await removeTask(taskId);
-    if (!deletedTask) {
+    const deletedTask = await removeTask(taskId,userId);
+    console.log(deletedTask);
+    if (!deletedTask[0]) {
       return res.status(404).json({ error: 'Task not found' });
-    }
+    };
     res.json({ message: 'Task deleted successfully' });
     } catch (err) {
       res.status(500).json({ error: 'Server error' });

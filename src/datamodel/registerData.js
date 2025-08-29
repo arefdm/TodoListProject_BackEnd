@@ -14,7 +14,6 @@ export const getUser = async (email)=>{
 export const getUserById = async (userId) => {
     try {
         const userEmail = await db.select({email: users.email}).from(users).where(eq(users.id,userId));
-        console.log(userEmail[0]);
         return userEmail[0];
     } catch (error) {
         return Promise.reject(error);
