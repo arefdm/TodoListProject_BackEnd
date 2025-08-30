@@ -72,7 +72,7 @@ export const logedInUser =async (req,res) => {
 
 export const logout =(req,res) => {
   try {
-    if(!req.cookie?.authToken){
+    if(!req.cookies?.authToken){
       return res.json({message: "You are already log out"})
     }
     res.clearCookie("authToken", { httpOnly: true });
