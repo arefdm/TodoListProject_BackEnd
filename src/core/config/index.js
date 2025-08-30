@@ -6,5 +6,8 @@ export const config = {
     },
     database:{
         url:process.env.DATABASE_URL
+    },
+    jwtSecret:{
+        secret:process.env.ACCESS_TOKEN_SECRET
     }
 }
