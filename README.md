@@ -45,7 +45,7 @@ This is a RESTful API for a simple task management application built with Node.j
 1. Clone the repository:
 
    ```
-   git clone https://github.com/arefdm/TodoListProject_BackEnd.git
+   git clone
    cd TodoListProject_BackEnd
    ```
 
