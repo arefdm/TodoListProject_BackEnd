@@ -19,7 +19,6 @@ export const createTask = async (req,res) => {
   await addNewTask(userId,title,description,dueDate,status);
   res.status(201).json({"message": "task added successfully"});
   } catch (err) {
-    console.error(err.message);
     res.status(500).json({ error: 'Server error' });
   }
 }
@@ -44,7 +43,6 @@ export const deleteTask = async (req,res) => {
     const userId = req.user.userId;
     const taskId = req.params.task_id;
     const deletedTask = await removeTask(taskId,userId);
-    console.log(deletedTask);
     if (!deletedTask[0]) {
       return res.status(404).json({ error: 'Task not found' });
     };
