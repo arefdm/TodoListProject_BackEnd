@@ -44,50 +44,47 @@ This is a RESTful API for a simple task management application built with Node.j
 
 1. Clone the repository:
 
-```
-git clone https://github.com/arefdm/TodoListProject_BackEnd.git
-cd TodoListProject_BackEnd
-
-```
+   ```
+   git clone https://github.com/arefdm/TodoListProject_BackEnd.git
+   cd TodoListProject_BackEnd
+   ```
 
 2. Install dependencies:
 
-```
-npm install
-# or
-yarn install
-```
+   ```
+   npm install
+   # or
+   yarn install
+   ```
 
 3. select a postgreSQL database service like neon or supabase and create new project in that.
 
 
 4. Create a `.env` file in the root directory and add the following environment variables:
 
-```
-PORT= the port that you want to system use.
-DATABASE_URL = you should get URL from your project in database servise that you create project in.
-JWT_SECRET=your_jwt_secret_key
-```
+   ```
+   PORT= the port that you want to system use.
+   DATABASE_URL = you should get URL from your project in database servise that you    create project in.
+   JWT_SECRET=your_jwt_secret_key
+   ```
 
-- Make sure to replace the placeholders with your actual database value.
-- `JWT_SECRET` should be a strong, random string to secure your tokens.
+   - Make sure to replace the placeholders with your actual database value.
+   - `JWT_SECRET` should be a strong, random string to secure your tokens.
 
 5. Set up your PostgreSQL database:
 
-- create a folder thats name is drizzle
+   - create a folder thats name is drizzle
 
-- Generate migration for drizzle:
+   - Generate migration for drizzle:
 
-  ```
-  npx drizzle-kit generate
+   ```
+   npx drizzle-kit generate
+   ```
+   - Apply migration to set database schema to database service:
 
-  ```
-- Apply migration to set database schema to database service:
-
-  ```
-  npx drizzle-kit migrate
-
-  ```
+   ```
+   npx drizzle-kit migrate
+   ```
 ---
 
 ## Running the Server
