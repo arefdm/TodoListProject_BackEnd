@@ -45,7 +45,7 @@ This is a RESTful API for a simple task management application built with Node.j
 1. Clone the repository:
 
 ```
-git clone 
+git clone https://github.com/arefdm/TodoListProject_BackEnd.git
 cd TodoListProject_BackEnd
 
 ```
@@ -64,7 +64,7 @@ yarn install
 4. Create a `.env` file in the root directory and add the following environment variables:
 
 ```
-PORT=5000
+PORT= the port that you want to system use.
 DATABASE_URL = you should get URL from your project in database servise that you create project in.
 JWT_SECRET=your_jwt_secret_key
 ```
@@ -74,18 +74,20 @@ JWT_SECRET=your_jwt_secret_key
 
 5. Set up your PostgreSQL database:
 
-Generate migration for drizzle:
+- create a folder thats name is drizzle
 
-```
-npx drizzle-kit generate
+- Generate migration for drizzle:
 
-```
-Apply migration to set database schema to database service:
+  ```
+  npx drizzle-kit generate
 
-```
-npx drizzle-kit migrate
+  ```
+- Apply migration to set database schema to database service:
 
-```
+  ```
+  npx drizzle-kit migrate
+
+  ```
 ---
 
 ## Running the Server
