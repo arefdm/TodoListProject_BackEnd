@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "bf81746d-b154-43b0-901e-85c0c9163d0b",
+		"name": "To Do",
+		"description": "This is a RESTful API for a simple task management application. provides **user authentication with JWT** and **CRUD operations on tasks**.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40595874"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test.register@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Registers a new user.\n\n- **Validation:**\n    \n    - Email must be in a valid format.\n        \n    - Password must be at least **4 characters**."
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test.register@gmail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "Logs in a user and sets a **JWT token** in the response cookie.\n\n- **Validation:** Same as registration.\n    \n\n**Response:**\n\n- User email\n    \n- JWT authentication token in cookie"
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/get_user",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"get_user"
+							]
+						},
+						"description": "Returns the authenticated user’s email.\n\n- **Requirement:** A valid JWT token in request cookie."
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"logout"
+							]
+						},
+						"description": "Clears the authentication cookie and logs out the user."
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication & User Management"
+		},
+		{
+			"name": "task-management",
+			"item": [
+				{
+					"name": "retrieve-all-tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "dueDate",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Fetches all tasks belonging to the authenticated user.  \n  \nSupports optional filters:\n\n**Query Parameters:**\n\n- `title` → filter by task title\n    \n- `dueDate` → filter by due date (format: `YYYY-MM-DD`)"
+					},
+					"response": []
+				},
+				{
+					"name": "add-task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"add test\",\r\n    \"description\": \"add test\",\r\n    \"dueDate\": \"2025-07-06\",\r\n    \"status\": \"to do\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks"
+							]
+						},
+						"description": "Adds a new task for the authenticated user."
+					},
+					"response": []
+				},
+				{
+					"name": "edit-task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"edit task\" ,\r\n    \"description\": \"edit task\",\r\n    \"dueDate\": \"2025-07-06\",\r\n    \"status\": \"to do\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/tasks/:task_id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								":task_id"
+							],
+							"variable": [
+								{
+									"key": "task_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Updates an existing task.\n\n- **Path Variable:** `task_id` → Task ID to update"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/tasks/:task_id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								":task_id"
+							],
+							"variable": [
+								{
+									"key": "task_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Deletes a task by ID.\n\n- **Path Variable:** `task_id` → Task ID to delete"
+					},
+					"response": []
+				}
+			],
+			"description": "These APIs are used for task CRUD. To use these APIs valid authentication token must be set in request cookie, so before use these API use login API to set authentication cookie."
+		}
+	]
+}
